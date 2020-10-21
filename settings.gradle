@@ -1,0 +1,23 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'springboot-examples'
+
+/**
+ * 公共依赖
+ */
+include ":commons"
+
+/**
+ * JDBC
+ */
+include ":jdbc"
+
+/**
+ * kafka
+ */
+include ":kafka:producer"
+include ":kafka:consumer"

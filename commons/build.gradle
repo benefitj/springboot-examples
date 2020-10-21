@@ -1,0 +1,13 @@
+
+apply from: "${getRootDir()}/buildSystem/base.gradle"
+
+group = 'com.benefitj'
+version = '1.0.0-SNAPSHOT'
+
+jar {
+    archiveName("commons")
+}
+
+dependencies {
+}
+
