@@ -21,3 +21,8 @@ include ":jdbc"
  */
 include ":kafka:producer"
 include ":kafka:consumer"
+
+/***/
+include ":mqtt:mqtt-core"
+include ":mqtt:mqtt-publisher"
+include ":mqtt:mqtt-subscriber"
