@@ -10,8 +10,11 @@ public class MessagePublisherAdapter extends BaseEventAdapter<MqttPublishMessage
 
   private MqttPublisher mqttPublisher;
 
+  public MessagePublisherAdapter() {
+  }
+
   public MessagePublisherAdapter(MqttPublisher mqttPublisher) {
-    this.mqttPublisher = mqttPublisher;
+    this.setMqttPublisher(mqttPublisher);
   }
 
   @Override
@@ -23,4 +26,11 @@ public class MessagePublisherAdapter extends BaseEventAdapter<MqttPublishMessage
     mqttPublisher.send(msg.getTopics(), mm);
   }
 
+  public MqttPublisher getMqttPublisher() {
+    return mqttPublisher;
+  }
+
+  public void setMqttPublisher(MqttPublisher mqttPublisher) {
+    this.mqttPublisher = mqttPublisher;
+  }
 }

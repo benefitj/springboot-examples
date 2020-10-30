@@ -1,5 +1,6 @@
 package com.benefitj.mqttsubscriber;
 
+import com.benefitj.mqtt.MqttHeaders;
 import com.benefitj.mqtt.MqttMessageSubscriber;
 import com.benefitj.mqtt.spring.EnableMqttConfiguration;
 import com.benefitj.spring.applicationevent.EnableAutoApplicationListener;
@@ -29,7 +30,7 @@ public class MqttSubscriberApplication {
     @Override
     public void handleMessage(Message<?> message) throws MessagingException {
       log.info("{}, payload: {}"
-          , message.getHeaders()
+          , MqttHeaders.of(message.getHeaders())
           , new String((byte[]) message.getPayload())
       );
     }
