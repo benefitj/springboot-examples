@@ -18,6 +18,7 @@ import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.integration.mqtt.support.MqttMessageConverter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,19 +80,29 @@ public class MqttConfiguration {
   }
 
   /**
+   * 消息转换
+   */
+  @ConditionalOnMissingBean
+  @Bean
+  public MqttMessageConverter mqttMessageConverter() {
+    DefaultPahoMessageConverter converter = new DefaultPahoMessageConverter();
+    converter.setPayloadAsBytes(true);
+    return converter;
+  }
+
+  /**
    * MQTT消息订阅绑定（消费者）
    */
   @ConditionalOnMissingBean
   @Bean
   public MqttPahoMessageDrivenChannelAdapter channelAdapter(MqttPahoClientFactory clientFactory,
                                                             MqttOptionsProperty property,
+                                                            MqttMessageConverter converter,
                                                             MqttMessageSubscriber subscriber) {
     String clientId = getClientId(property);
     MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(clientId, clientFactory);
-    adapter.setCompletionTimeout(5000);
+    adapter.setCompletionTimeout(property.getCompletionTimeout());
     adapter.setRecoveryInterval(property.getRecoveryInterval());
-    DefaultPahoMessageConverter converter = new DefaultPahoMessageConverter();
-    converter.setPayloadAsBytes(true);
     adapter.setConverter(converter);
     // 服务质量
     adapter.setQos(property.getQos());

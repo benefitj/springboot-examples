@@ -48,9 +48,13 @@ public class MqttPublisherApplication {
     }
 
     private void sendMqttMessage() {
-      String publishTopics = property.getPublishTopics();
-      publisher.send(publishTopics + "010003b8", DateFmtter.fmtNowS());
-      log.info("发布消息...");
+      try {
+        String publishTopics = property.getPublishTopics();
+        publisher.send(publishTopics + "010003b8", DateFmtter.fmtNowS());
+        log.info("发布消息...");
+      } catch (Exception e) {
+        log.info("throw: {}", e.getMessage());
+      }
     }
   }
 }

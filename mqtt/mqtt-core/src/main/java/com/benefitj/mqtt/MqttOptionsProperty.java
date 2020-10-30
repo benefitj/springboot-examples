@@ -43,7 +43,7 @@ public class MqttOptionsProperty {
    */
   private String serverURIs;
   /**
-   * 是否自动重连
+   * 是否自动重连，默认自动重连
    */
   private Boolean automaticReconnect = true;
   /**
@@ -55,11 +55,15 @@ public class MqttOptionsProperty {
    */
   private String publishTopics;
   /**
-   * 恢复间隔
+   * 发送完成超时，默认3秒
+   */
+  private long completionTimeout = 3000;
+  /**
+   * 恢复间隔，默认3秒
    */
   private int recoveryInterval = 3000;
   /**
-   * 服务质量
+   * 服务质量，默认 1
    */
   private int qos = 1;
 
@@ -149,6 +153,14 @@ public class MqttOptionsProperty {
 
   public void setPublishTopics(String publishTopics) {
     this.publishTopics = publishTopics;
+  }
+
+  public long getCompletionTimeout() {
+    return completionTimeout;
+  }
+
+  public void setCompletionTimeout(long completionTimeout) {
+    this.completionTimeout = completionTimeout;
   }
 
   public int getRecoveryInterval() {
