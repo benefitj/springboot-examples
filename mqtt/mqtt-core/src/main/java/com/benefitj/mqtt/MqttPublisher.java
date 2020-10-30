@@ -6,7 +6,6 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -221,11 +220,8 @@ public class MqttPublisher {
     IMqttClient c = this.client;
     if (c == null || !c.isConnected()) {
       if (force || isObtain()) {
-        Field field = ReflectUtils.getField(MqttPahoMessageDrivenChannelAdapter.class
+        c = this.client = ReflectUtils.getFieldValue(channelAdapter
             , f -> f.getType().isAssignableFrom(IMqttClient.class));
-        if (field != null) {
-          c = this.client = ReflectUtils.getFieldValue(field, channelAdapter);
-        }
         this.obtainTime = System.currentTimeMillis();
       }
     }
