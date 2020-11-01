@@ -129,6 +129,9 @@ public class MqttConfiguration {
       Collections.addAll(topics, subscribeTopics.split(","));
       topics.stream().filter(StringUtils::isNotBlank)
           .forEach(topic -> adapter.addTopic(topic, property.getQos()));
+    } else {
+      // 默认的topic
+      adapter.addTopic("/empty", 0);
     }
   }
 
