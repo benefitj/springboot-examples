@@ -9,10 +9,12 @@ apply from: "${getRootDir()}/buildSystem/springboot.gradle"
 dependencies {
 
 	compile(project(":commons"))
-	compile(project(":redis:redis-core"))
-
+	compile "org.apache.commons:commons-pool2:2.9.0"
+	compile "com.fasterxml.jackson.core:jackson-databind:2.11.3"
+	compile "com.fasterxml.jackson.core:jackson-annotations:2.11.3"
+	// redis
+	implementation "org.springframework.boot:spring-boot-starter-data-redis:${springBootVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter'
-	//implementation 'org.springframework.boot:spring-boot-starter-web'
 
 }
 

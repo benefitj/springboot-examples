@@ -25,13 +25,13 @@ include ":kafka:consumer"
 /**
  * mqtt
  */
-include ":mqtt:mqtt-core"
+//include ":mqtt:mqtt-core"
 include ":mqtt:mqtt-publisher"
 include ":mqtt:mqtt-subscriber"
 
 /**
  * redis
  */
-include ":redis:redis-core"
+//include ":redis:redis-core"
 include ":redis:redis-publisher"
 include ":redis:redis-subscriber"

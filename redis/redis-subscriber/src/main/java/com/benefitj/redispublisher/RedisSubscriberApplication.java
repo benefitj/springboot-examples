@@ -1,10 +1,10 @@
 package com.benefitj.redispublisher;
 
 import com.benefitj.core.EventLoop;
-import com.benefitj.redis.EnableRedisMessageChannelConfiguration;
-import com.benefitj.redis.RedisMessageChannel;
-import com.benefitj.redis.RedisMessageListener;
 import com.benefitj.spring.applicationevent.EnableAutoApplicationListener;
+import com.benefitj.spring.redis.EnableRedisMessageChannelConfiguration;
+import com.benefitj.spring.redis.RedisMessageChannel;
+import com.benefitj.spring.redis.RedisMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,7 +31,7 @@ public class RedisSubscriberApplication {
 
   @Slf4j
   @Component
-  @RedisMessageChannel("channel:test")
+  @RedisMessageChannel({"channel:test", "channel:test2"})
   public static class RedisChannel implements RedisMessageListener {
 
     @Override

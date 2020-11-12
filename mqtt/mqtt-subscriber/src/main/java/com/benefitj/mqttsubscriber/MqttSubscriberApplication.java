@@ -1,9 +1,9 @@
 package com.benefitj.mqttsubscriber;
 
-import com.benefitj.mqtt.MqttHeaders;
-import com.benefitj.mqtt.MqttMessageSubscriber;
-import com.benefitj.mqtt.spring.EnableMqttConfiguration;
 import com.benefitj.spring.applicationevent.EnableAutoApplicationListener;
+import com.benefitj.spring.mqtt.EnableMqttConfiguration;
+import com.benefitj.spring.mqtt.MqttHeaders;
+import com.benefitj.spring.mqtt.MqttMessageSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

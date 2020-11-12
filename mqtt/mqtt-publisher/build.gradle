@@ -9,7 +9,9 @@ apply from: "${getRootDir()}/buildSystem/springboot.gradle"
 dependencies {
 
 	compile(project(":commons"))
-	compile(project(":mqtt:mqtt-core"))
+	implementation "org.springframework.boot:spring-boot-starter-integration:${springBootVersion}"
+	implementation "org.springframework.integration:spring-integration-stream:${springIntegrationVersion}"
+	implementation "org.springframework.integration:spring-integration-mqtt:${springIntegrationVersion}"
 
 	implementation 'org.springframework.boot:spring-boot-starter'
 
