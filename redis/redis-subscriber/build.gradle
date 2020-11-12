@@ -9,9 +9,10 @@ apply from: "${getRootDir()}/buildSystem/springboot.gradle"
 dependencies {
 
 	compile(project(":commons"))
-	compile(project(":mqtt:mqtt-core"))
+	compile(project(":redis:redis-core"))
 
 	implementation 'org.springframework.boot:spring-boot-starter'
+	//implementation 'org.springframework.boot:spring-boot-starter-web'
 
 }
 

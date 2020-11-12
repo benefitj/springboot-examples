@@ -40,7 +40,7 @@ dependencies {
     compileOnly fileTree(dir: 'libs/source', include: ['*.jar'])
 
 
-    implementation "com.alibaba:fastjson:1.2.73"
+    implementation "com.alibaba:fastjson:1.2.75"
     implementation 'javax.inject:javax.inject:1'
     implementation 'commons-io:commons-io:2.6'
     implementation 'org.apache.commons:commons-lang3:3.9'
