@@ -2,6 +2,7 @@ package com.benefitj.rabbitmqpublisher;
 
 import com.benefitj.core.DateFmtter;
 import com.benefitj.core.EventLoop;
+import com.benefitj.rabbitmqpublisher.config.AmqpConfig;
 import com.benefitj.spring.applicationevent.EnableAutoApplicationListener;
 import com.benefitj.spring.applicationevent.IApplicationReadyEventListener;
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +39,29 @@ public class RabbitMQPublisherApplication {
       single.scheduleAtFixedRate(() -> {
         String msg = DateFmtter.fmtNow();
         log.info("发送消息: {}", msg);
-        template.convertAndSend("test", msg);
+        template.convertSendAndReceive(AmqpConfig.EXCHANGE, AmqpConfig.ROUTING_KEY, msg);
       }, 1, 5, TimeUnit.SECONDS);
     }
   }
+
+//  @Component
+//  @Slf4j
+//  public static class TestHandler2 {
+//
+//    @RabbitListener(
+//        bindings = {
+//            @QueueBinding(
+//                value = @Queue(name = AmqpConfig.QUEUE, exclusive = "false", durable = "false", autoDelete = "true"),
+//                exchange = @Exchange(name = AmqpConfig.EXCHANGE, type = ExchangeTypes.DIRECT),
+//                key = AmqpConfig.ROUTING_KEY
+//            )
+//        }
+//    )
+//    @RabbitHandler
+//    public void process(@Headers Map<String, Object> headers, @Payload String payload) {
+//      log.info("1.  headers: {}, payload: {}", JSON.toJSONString(headers), payload);
+//    }
+//
+//  }
 
 }

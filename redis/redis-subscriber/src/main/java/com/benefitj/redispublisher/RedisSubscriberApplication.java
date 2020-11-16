@@ -31,7 +31,7 @@ public class RedisSubscriberApplication {
 
   @Slf4j
   @Component
-  @RedisMessageChannel({"channel:test", "channel:test2"})
+  @RedisMessageChannel({"${spring.redis.subscribe-channel}", "channel:test2"})
   public static class RedisChannel implements RedisMessageListener {
 
     @Override

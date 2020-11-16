@@ -8,7 +8,7 @@ import java.lang.annotation.*;
  * @author DINGXIUAN
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.TYPE})
 @Inherited
 @Documented
 public @interface RabbitQueue {
