@@ -1,7 +1,7 @@
 
 
 ext {
-    springBootVersion = "2.3.5.RELEASE"
+    springBootVersion = "2.4.0"
     springIntegrationVersion = "5.3.1.RELEASE"
 }
 
@@ -9,5 +9,8 @@ allprojects {
 
     apply plugin: 'java'
     apply plugin: 'maven'
+
+    group = 'com.benefitj'
+    version = '1.0.0-SNAPSHOT'
 
 }
