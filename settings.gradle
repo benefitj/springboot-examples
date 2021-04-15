@@ -19,8 +19,7 @@ include ":jdbc"
 /**
  * kafka
  */
-include ":kafka:producer"
-include ":kafka:consumer"
+include ":kafka:producer", ":kafka:consumer"
 
 /**
  * mqtt
@@ -36,3 +35,15 @@ include ":redis:redis-publisher", ":redis:redis-subscriber"
  * rabbitmq
  */
 include ":rabbitmq:rabbitmq-publisher", ":rabbitmq:rabbitmq-subscriber"
+
+/**
+ * 时序数据库
+ */
+include ":timeseries-db:timescaledb" // PostgreSQL/TimescaleDB
+include ":timeseries-db:tdengine"
+
+
+/**
+ * vert.x
+ */
+include ":vertx"

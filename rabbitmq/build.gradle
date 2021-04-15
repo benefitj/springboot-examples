@@ -5,8 +5,8 @@ dependencies {
 
 	compileOnly(project(":commons"))
 
-	compile 'org.aspectj:aspectjweaver:1.9.6'
-	compile "org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}"
+//	compile 'org.aspectj:aspectjweaver:1.9.6'
+//	compile "org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}"
 
 }
 

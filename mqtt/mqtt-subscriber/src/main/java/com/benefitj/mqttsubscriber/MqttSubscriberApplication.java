@@ -1,9 +1,8 @@
 package com.benefitj.mqttsubscriber;
 
-import com.benefitj.spring.applicationevent.EnableAutoApplicationListener;
-import com.benefitj.spring.mqtt.EnableMqttConfiguration;
 import com.benefitj.spring.mqtt.MqttHeaders;
-import com.benefitj.spring.mqtt.MqttMessageSubscriber;
+import com.benefitj.spring.mqtt.MqttMessageListener;
+import com.benefitj.spring.mqtt.configuration.EnableMqttSubscriber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * MQTT消息订阅
  */
-@EnableAutoApplicationListener
-@EnableMqttConfiguration
+@EnableMqttSubscriber
 @SpringBootApplication
 public class MqttSubscriberApplication {
   public static void main(String[] args) {
@@ -25,9 +23,9 @@ public class MqttSubscriberApplication {
 
   @Slf4j
   @Component
-  public static class DefaultMqttMessageSubscriber implements MqttMessageSubscriber {
+  public static class DefaultMqttMessageSubscriber {
 
-    @Override
+    @MqttMessageListener(topics = "/device/+", clientIdPrefix = "mqtt-subscriber-")
     public void handleMessage(Message<?> message) throws MessagingException {
       log.info("{}, payload: {}"
           , MqttHeaders.of(message.getHeaders())

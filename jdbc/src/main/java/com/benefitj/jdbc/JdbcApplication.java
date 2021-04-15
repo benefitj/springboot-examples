@@ -2,15 +2,13 @@ package com.benefitj.jdbc;
 
 import com.alibaba.fastjson.JSON;
 import com.benefitj.core.DateFmtter;
+import com.benefitj.core.ShutdownHook;
 import com.benefitj.jdbc.sql.SqlMetaData;
 import com.benefitj.jdbc.sql.SqlUtils;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 public class JdbcApplication {
@@ -46,10 +44,10 @@ public class JdbcApplication {
 
       Statement s = c.createStatement();
 
-//      String sql = "SHOW DATABASES";
+      String sql = "SHOW DATABASES";
 //      String sql = "SHOW TABLES";
 //      String sql = "SELECT * FROM HS_PERSON";
-      String sql = "SHOW TABLE STATUS";
+//      String sql = "SHOW TABLE STATUS";
 
       ResultSet set = s.executeQuery(sql);
       ResultSetMetaData metaData = set.getMetaData();
@@ -121,11 +119,24 @@ public class JdbcApplication {
 
 
 
-  private static final String URL = "jdbc:mysql://192.168.1.198:53306/hsrg";
+//  private static final String URL = "jdbc:mysql://192.168.1.198:53306";
+  private static final String URL = "jdbc:mysql://127.0.0.1:6030";
+//  private static final String URL = "jdbc:mysql://192.168.1.198:53306/mysql";
+//  private static final String URL = "jdbc:mysql://127.0.0.1:53306/mysql";
   private static final String USER = "root";
   private static final String PASSWORD = "hsrg8888";
   private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
+
+  private static final Set<String> SCHEMA_DATABASES;
+
+  static {
+    Set<String> databases = new HashSet<>(3);
+    databases.add("information_schema");
+    databases.add("performance_schema");
+    databases.add("mysql");
+    SCHEMA_DATABASES = Collections.unmodifiableSet(databases);
+  }
 
   private static final class Holder {
 
@@ -135,13 +146,25 @@ public class JdbcApplication {
       try {
         Class.forName(DRIVER);
         INSTANCE = DriverManager.getConnection(URL, USER, PASSWORD);
+        registerShutdown(INSTANCE);
       } catch (SQLException | ClassNotFoundException e) {
         throw new IllegalStateException(e);
       }
+    }
+
+    private static void registerShutdown(final Connection connection) {
+      ShutdownHook.register(() -> {
+        try {
+          connection.close();
+        } catch (SQLException ignore) { /* ~ */ }
+      });
     }
   }
 
   public static Connection getConnection() {
     return Holder.INSTANCE;
   }
+
+
+
 }

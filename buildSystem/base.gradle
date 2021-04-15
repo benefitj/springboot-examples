@@ -31,6 +31,7 @@ repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     mavenCentral()
     jcenter()
+    maven { url 'https://repo.spring.io/release' }
 }
 
 
@@ -40,11 +41,11 @@ dependencies {
     compileOnly fileTree(dir: 'libs/source', include: ['*.jar'])
 
 
-    implementation "com.alibaba:fastjson:1.2.75"
+    implementation "com.alibaba:fastjson:1.2.76"
     implementation 'javax.inject:javax.inject:1'
     implementation 'commons-io:commons-io:2.6'
-    implementation 'org.apache.commons:commons-lang3:3.9'
-    implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.google.guava:guava:30.1.1-jre'
     //compileOnly 'org.slf4j:slf4j-log4j12:1.7.30'
 
 }

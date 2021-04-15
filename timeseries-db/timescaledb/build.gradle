@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	//id 'org.springframework.experimental.aot' version '0.9.1'
+}
+
+apply from: "${getRootDir()}/buildSystem/springboot.gradle"
+
+dependencies {
+
+	compile(project(":commons"))
+//	compile "org.apache.commons:commons-pool2:2.9.0"
+	compile "com.fasterxml.jackson.core:jackson-databind:2.11.3"
+	compile "com.fasterxml.jackson.core:jackson-annotations:2.11.3"
+
+
+	compile 'org.aspectj:aspectjweaver:1.9.4'
+	compile 'com.alibaba:easyexcel:2.2.6'
+
+	compile 'org.postgresql:postgresql:42.2.18'
+
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	implementation("org.springframework.boot:spring-boot-starter")
+
+	//compile 'com.h2database:h2:1.4.200'
+//	compile "mysql:mysql-connector-java:${mysqlVersion}"
+//	compile "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+//	compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+//	compile "tk.mybatis:mapper-spring-boot-starter:${mapperVersion}"
+//	compile "com.github.pagehelper:pagehelper-spring-boot-starter:${pagehelperVersion}"
+//	compile "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.6.2"
+
+}
+

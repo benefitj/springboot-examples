@@ -1,7 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.0'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	//id 'org.springframework.experimental.aot' version '0.9.1'
 }
 
 apply from: "${getRootDir()}/buildSystem/springboot.gradle"
@@ -9,9 +10,9 @@ apply from: "${getRootDir()}/buildSystem/springboot.gradle"
 dependencies {
 
 	compile(project(":commons"))
-	compile(project(":rabbitmq"))
 
 	implementation "org.springframework.boot:spring-boot-starter"
+	implementation "org.springframework.boot:spring-boot-starter-amqp:${springBootVersion}"
 
 }
 

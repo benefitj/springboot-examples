@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	//id 'org.springframework.experimental.aot' version '0.9.1'
+}
+
+apply from: "${getRootDir()}/buildSystem/springboot.gradle"
+
+dependencies {
+	compile fileTree(dir: 'libs/jar', include: ['*.jar'])
+	compileOnly fileTree(dir: 'libs/source', include: ['*.jar'])
+
+	compile project(":commons")
+	compile("org.influxdb:influxdb-java:2.19")
+	compile 'org.jetbrains.kotlin:kotlin-stdlib:1.4.20'
+
+	compile 'com.taosdata.jdbc:taos-jdbcdriver:2.0.14'
+
+	//compile "mysql:mysql-connector-java:${mysqlVersion}"
+	compile "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+	compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+	compile "tk.mybatis:mapper-spring-boot-starter:${mapperVersion}"
+	compile "com.github.pagehelper:pagehelper-spring-boot-starter:${pagehelperVersion}"
+	compile "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+
+	compile 'org.aspectj:aspectjweaver:1.9.4'
+	compile 'com.alibaba:easyexcel:2.2.6'
+
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	implementation("org.springframework.boot:spring-boot-starter")
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher:1.6.2"
+
+}

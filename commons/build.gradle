@@ -2,5 +2,10 @@
 apply from: "${getRootDir()}/buildSystem/base.gradle"
 
 dependencies {
+
+    compileOnly "org.springframework.boot:spring-boot-starter-integration:${springBootVersion}"
+    compileOnly "org.springframework.integration:spring-integration-stream:${springIntegrationVersion}"
+    compileOnly "org.springframework.integration:spring-integration-mqtt:${springIntegrationVersion}"
+
 }
 
